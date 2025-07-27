@@ -74,7 +74,7 @@ if uploaded_journal is not None and uploaded_rules is not None:
     processed_csv = output.getvalue()
 
     # ダウンロードボタン表示
-    csv = df.to_csv(index=false,encoding='cp932')
+    csv = df.to_csv(index=False,encoding='cp932')
     st.download_button(
         label="処理済みCSVをダウンロード",
         data=processed_csv,
