@@ -71,13 +71,15 @@ if uploaded_journal is not None and uploaded_rules is not None:
     output = io.StringIO()
     writer = csv.writer(output, lineterminator='\n')
     writer.writerows(new_rows)
-    processed_csv = output.getvalue()
 
+    # cp932でエンコード（バイト型に変換）
+    encoded_csv = output.getvalue().encode('cp932')
+    output.close()
+    
     # ダウンロードボタン表示
-    csv = df.to_csv(index=False,encoding='cp932')
     st.download_button(
         label="処理済みCSVをダウンロード",
-        data=processed_csv,
-        file_name="output.csv",
+        data=encoded_csv,
+        file_name="インポート用データ_変換後.csv",
         mime="text/csv"
     )
